@@ -1,7 +1,7 @@
 package com.example.demo.task.service;
 
 import com.example.demo.exceptions.DataException;
-import com.example.demo.task.TaskDto;
+import com.example.demo.task.dto.TaskDto;
 import com.example.demo.task.entities.*;
 import com.example.demo.task.mapper.TaskMapper;
 import com.example.demo.task.repository.TaskRepository;
@@ -37,6 +37,8 @@ public class TaskService implements ITaskService {
 
     public List<TaskDto> getTasks(Optional<String> filter, Optional<String> order) {
         List<TaskEntity> tasks;
+        Specification<TaskEntity> spec = null;
+
         if(filter.isPresent()) {
             TaskSpecificationBuilder builder = new TaskSpecificationBuilder();
             Pattern pattern = Pattern.compile("(\\w+?)(:|<|>)(\\w+?),");
@@ -44,11 +46,10 @@ public class TaskService implements ITaskService {
             while (matcher.find()) {
                 builder.with(matcher.group(1), matcher.group(2), matcher.group(3));
             }
-            Specification<TaskEntity> spec = builder.build();
-            tasks = taskRepository.findAll(spec);
-        }else {
-            tasks = taskRepository.findAll();
+            spec = builder.build();
         }
+
+        tasks = spec != null ? taskRepository.findAll(spec) : taskRepository.findAll();
 
         if(order.isPresent()) {
             switch (TaskOrderableFields.valueOf(order.get().toUpperCase())) {
@@ -62,6 +63,9 @@ public class TaskService implements ITaskService {
                     break;
                 case DESCRIPTION:
                     tasks.sort(TaskComparators.compareTaskByDescription);
+                    break;
+                case CREATIONDATE:
+                    tasks.sort(TaskComparators.compareTaskByCreationDate);
             }
         }
          

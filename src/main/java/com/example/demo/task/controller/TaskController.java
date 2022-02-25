@@ -1,6 +1,6 @@
 package com.example.demo.task.controller;
 
-import com.example.demo.task.TaskDto;
+import com.example.demo.task.dto.TaskDto;
 import com.example.demo.task.entities.TaskPriority;
 import com.example.demo.task.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;

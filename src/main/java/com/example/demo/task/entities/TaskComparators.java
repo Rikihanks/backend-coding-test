@@ -8,5 +8,6 @@ public class TaskComparators {
     public static Comparator<TaskEntity> compareTaskByPriority = Comparator.comparing(TaskEntity::getPriority);
     public static Comparator<TaskEntity> compareTaskByCompletion = Comparator.comparing(TaskEntity::isCompleted);
     public static Comparator<TaskEntity> compareTaskByDescription = Comparator.comparing(TaskEntity::getDescription);
+    public static Comparator<TaskEntity> compareTaskByCreationDate = Comparator.comparing(TaskEntity::getCreationDate);
 
 }

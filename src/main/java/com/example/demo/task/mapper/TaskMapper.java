@@ -1,7 +1,6 @@
 package com.example.demo.task.mapper;
 
-import com.example.demo.task.TaskDto;
-import com.example.demo.task.entities.SubtaskEntity;
+import com.example.demo.task.dto.TaskDto;
 import com.example.demo.task.entities.TaskEntity;
 import org.modelmapper.ModelMapper;
 import java.util.ArrayList;
@@ -20,9 +19,6 @@ public class TaskMapper {
     }
 
     public static TaskEntity convertToEntity(TaskDto taskDto) {
-        if(taskDto.getTasks().size() > 0){
-            return getModelMapperInstance().map(taskDto, SubtaskEntity.class);
-        }
         return getModelMapperInstance().map(taskDto, TaskEntity.class);
     }
 

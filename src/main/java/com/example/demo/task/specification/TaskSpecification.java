@@ -26,11 +26,11 @@ public class TaskSpecification implements Specification<TaskEntity> {
     @Override
     public Predicate toPredicate(Root<TaskEntity> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder) {
         if (criteria.getOperation().equals(SearchOperation.getSimpleOperation('>'))) {
-            return criteriaBuilder.greaterThanOrEqualTo(
+            return criteriaBuilder.greaterThan(
                     root.<String> get(criteria.getKey()), criteria.getValue().toString());
         }
         else if (criteria.getOperation().equals(SearchOperation.getSimpleOperation('<'))) {
-            return criteriaBuilder.lessThanOrEqualTo(
+            return criteriaBuilder.lessThan(
                     root.<String> get(criteria.getKey()), criteria.getValue().toString());
         }
         else if (criteria.getOperation().equals(SearchOperation.getSimpleOperation(':'))) {

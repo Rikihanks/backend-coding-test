@@ -1,30 +1,18 @@
 # Spring Boot to-do app challenge
 
-With this challenge we want to see your skills and the quality of the code, we will take into account the use of SOLID principles. You can use all the tools and libraries you want!
-
-
-## Required tools
-
-1. [Java 11](https://adoptopenjdk.net/)
-2. [MySQL](https://dev.mysql.com/downloads/mysql/)
-
-## Objectives
 
 ##### Principal
+--With this project, it is also included a JSON export of a postman collection with examples to test all the methods.--
 
-Develop the necessary functionalities for the application to be able to perform the following requests:
+A DTO was created for the TaskEntity since I believe it's a good practice to keep the entities objects to use with
+the persistence layer and decouple them from the other layers.
+A library to perform the conversions between DTO and Entity was used in order to save time writing conversion
+methods.
 
-- **GET** http request that returns a list of all tasks stored in the database.
-- **GET** http request that returns a specific task by their ID.
-- **POST** http request that stores a new task in the database.
-- **PUT** http request that updates a specific task by their ID.
-- **DELETE** http request that deletes a task in the database.
+For the improved request that returns a list of tasks, the **Criteria** and **Specification** patterns where used
+to filter the results. On the other hand, comparators where used to order the results after they were
+retrieved from the database.
 
-##### Optional
+For the SubtaskEntity, my first approach was to use **hierarchy** where SubtaskEntity was a child of TaskEntity
+but due to time restrictions I couldn't make it work, so I ended up using a bidirectional **OneToMany** annotation.
 
-1. Improve the request that returns a list of tasks by adding the possibility to order and filter the results, for example:
-
-    - Order results by priority or creation date.
-    - Filter results by priority and/or completion.
-    
-2. Create a new entity called *SubtaskEntity* that allows one task to have multiple subtasks.

@@ -1,0 +1,150 @@
+{
+	"info": {
+		"_postman_id": "33d85fea-a016-4e41-9115-6dc2ad9bd714",
+		"name": "Backend",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Retrieve Tasks, see params for filtering and ordering.",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8443/api/v1/tasks",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8443",
+					"path": [
+						"api",
+						"v1",
+						"tasks"
+					],
+					"query": [
+						{
+							"key": "order",
+							"value": "creationDate",
+							"description": "Order by field",
+							"disabled": true
+						},
+						{
+							"key": "filter",
+							"value": "id>7",
+							"description": "Greater than filter",
+							"disabled": true
+						},
+						{
+							"key": "filter",
+							"value": "description:aa",
+							"description": "Equals filter",
+							"disabled": true
+						},
+						{
+							"key": "filter",
+							"value": "id<7,description:aa",
+							"description": "Multiple filters. Will return tasks that meet at least one of the filters",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Save a new Task, can also have subtasks.",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \r\n        \"description\": \"bb\",\r\n        \"completed\": false,\r\n        \"priority\": \"MEDIUM\",\r\n        \"subTasks\": [\r\n            {\r\n                \"description\": \"cc\",\r\n                \"completed\": false,\r\n                \"priority\": \"MEDIUM\"\r\n            }\r\n        ]\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8443/api/v1/tasks",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8443",
+					"path": [
+						"api",
+						"v1",
+						"tasks"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update a Task, updatable fields are description, completed and priority",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8443/api/v1/tasks/1/?priority=LOW&description=cambiada&completed=true",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8443",
+					"path": [
+						"api",
+						"v1",
+						"tasks",
+						"1",
+						""
+					],
+					"query": [
+						{
+							"key": "completed",
+							"value": "false",
+							"disabled": true
+						},
+						{
+							"key": "priority",
+							"value": "LOW"
+						},
+						{
+							"key": "description",
+							"value": "cambiada"
+						},
+						{
+							"key": "completed",
+							"value": "true"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete a task by its id",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8443/api/v1/tasks/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8443",
+					"path": [
+						"api",
+						"v1",
+						"tasks",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
