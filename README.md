@@ -17,3 +17,5 @@ retrieved from the database.
 
 For the SubtaskEntity, my first approach was to use **hierarchy** where SubtaskEntity was a child of TaskEntity  
 but due to time restrictions I couldn't make it work, so I ended up using a bidirectional **OneToMany** annotation.
+
+There are also some test in the test folder targeted to the basic operations of persistence layer.
